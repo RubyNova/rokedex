@@ -1,0 +1,2 @@
+[workspace]
+members = ["rokedex", "rokedex-cli"]
