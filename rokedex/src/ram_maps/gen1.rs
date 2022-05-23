@@ -36,6 +36,38 @@ impl RedBlueNAMap {
     fn is_data_checksum_valid(&self) -> bool {
         todo!()
     }
+    
+    fn pokedex_owned_data_is_valid(data: &[u8]) -> Result<(), super::RamLoadError> {
+        todo!()
+    }
+
+    fn pokedex_seen_data_is_valid(data: &[u8]) -> Result<(), super::RamLoadError> {
+        todo!()
+    }
+    
+    fn bag_items_data_is_valid(data: &[u8]) -> Result<(), super::RamLoadError> {
+        todo!()
+    }
+
+    fn money_data_is_valid(data: &[u8]) -> Result<(), super::RamLoadError> {
+        todo!()
+    }
+
+    fn rival_name_data_is_valid(data: &[u8]) -> Result<(), super::RamLoadError> {
+        todo!()
+    }
+
+    fn game_options_data_is_valid(data: &[u8]) -> Result<(), super::RamLoadError> {
+        todo!()
+    }
+
+    fn badges_data_is_valid(data: &[u8]) -> Result<(), super::RamLoadError> {
+        todo!()
+    }
+
+    fn boxes_data_is_valid(data: &[u8]) -> Result<(), super::RamLoadError> {
+        todo!()
+    }
 }
 
 impl RamMap for RedBlueNAMap {
@@ -126,6 +158,85 @@ impl RamMap for RedBlueNAMap {
                 }
             },
             Err(_) => panic!("Invalid binary data slice occured when using DATA_CHECKSUM_DATA_RANGE! This implemenation is broken! Please submit a bug report at <insert GiHub URL here>"),
+        }
+
+        // check caught pokemon recorded by the pokedex
+        match self.get_byte_subrange(RedBlueNAMap::POKEDEX_OWNED_DATA_RANGE) {
+            Ok(slice) => {
+                if let Err(e) = RedBlueNAMap::pokedex_owned_data_is_valid(slice) {
+                    return Err(e);
+                }
+            },
+            Err(_) => panic!("Invalid binary data slice occured when using POKEDEX_OWNED_DATA_RANGE! This implemenation is broken! Please submit a bug report at <insert GiHub URL here>"),
+        }
+
+        // check seen pokemon recorded by the pokedex
+        match self.get_byte_subrange(RedBlueNAMap::POKEDEX_SEEN_DATA_RANGE) {
+            Ok(slice) => {
+                if let Err(e) = RedBlueNAMap::pokedex_seen_data_is_valid(slice) {
+                    return Err(e);
+                }
+            },
+            Err(_) => panic!("Invalid binary data slice occured when using POKEDEX_SEEN_DATA_RANGE! This implemenation is broken! Please submit a bug report at <insert GiHub URL here>"),
+        }
+
+        // check bag and items
+        match self.get_byte_subrange(RedBlueNAMap::BAG_ITEMS_DATA_RANGE) {
+            Ok(slice) => {
+                if let Err(e) = RedBlueNAMap::bag_items_data_is_valid(slice) {
+                    return Err(e);
+                }
+            },
+            Err(_) => panic!("Invalid binary data slice occured when using BAG_ITEMS_DATA_RANGE! This implemenation is broken! Please submit a bug report at <insert GiHub URL here>"),
+        }
+
+        // check money
+        match self.get_byte_subrange(RedBlueNAMap::MONEY_DATA_RANGE) {
+            Ok(slice) => {
+                if let Err(e) = RedBlueNAMap::money_data_is_valid(slice) {
+                    return Err(e);
+                }
+            },
+            Err(_) => panic!("Invalid binary data slice occured when using MONEY_DATA_RANGE! This implemenation is broken! Please submit a bug report at <insert GiHub URL here>"),
+        }
+
+        // check rival name
+        match self.get_byte_subrange(RedBlueNAMap::RIVAL_NAME_DATA_RANGE) {
+            Ok(slice) => {
+                if let Err(e) = RedBlueNAMap::rival_name_data_is_valid(slice) {
+                    return Err(e);
+                }
+            },
+            Err(_) => panic!("Invalid binary data slice occured when using RIVAL_NAME_DATA_RANGE! This implemenation is broken! Please submit a bug report at <insert GiHub URL here>"),
+        }
+
+        // check game options
+        match self.get_byte_subrange(RedBlueNAMap::GAME_OPTIONS_DATA_RANGE) {
+            Ok(slice) => {
+                if let Err(e) = RedBlueNAMap::game_options_data_is_valid(slice) {
+                    return Err(e);
+                }
+            },
+            Err(_) => panic!("Invalid binary data slice occured when using GAME_OPTIONS_DATA_RANGE! This implemenation is broken! Please submit a bug report at <insert GiHub URL here>"),
+        }
+
+        // check badges
+        match self.get_byte_subrange(RedBlueNAMap::BADGES_DATA_RANGE) {
+            Ok(slice) => {
+                if let Err(e) = RedBlueNAMap::badges_data_is_valid(slice) {
+                    return Err(e);
+                }
+            },
+            Err(_) => panic!("Invalid binary data slice occured when using BADGES_DATA_RANGE! This implemenation is broken! Please submit a bug report at <insert GiHub URL here>"),
+        }
+
+        match self.get_byte_subrange(RedBlueNAMap::BOXES_DATA_RANGE) {
+            Ok(slice) => {
+                if let Err(e) = RedBlueNAMap::boxes_data_is_valid(slice) {
+                    return Err(e);
+                }
+            },
+            Err(_) => panic!("Invalid binary data slice occured when using BOXES_DATA_RANGE! This implemenation is broken! Please submit a bug report at <insert GiHub URL here>"),
         }
 
         Ok(())
